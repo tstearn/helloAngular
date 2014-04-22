@@ -16,7 +16,7 @@
                     <button class="destroy" ng-click="removeTodo(todo)"></button>
                 </div>
                 <form ng-submit="doneEditing(todo)">
-                    <input class="edit" ng-trim="false" ng-model="todo.title">
+                    <input class="edit" ng-trim="false" ng-model="todo.title" todo-escape="revertEditing(todo)">
                 </form>
             </li>
         </ul>
