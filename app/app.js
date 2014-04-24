@@ -7,6 +7,10 @@ angular.module('helloAngularApp', [])
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/:status', {
+          templateUrl: 'views/main.html',
+          controller: 'MainCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -18,6 +18,14 @@ angular.module('helloAngularApp')
             }
         }, true);
 
+        // Monitor the current route for changes and adjust the filter accordingly.
+        $scope.$on('$routeChangeSuccess', function () {
+            var status = $scope.status = $routeParams.status || '';
+            $scope.statusFilter = (status === 'active') ?
+            { completed: false } : (status === 'completed') ?
+            { completed: true } : null;
+        });
+
         //Method called to add an item
         $scope.addTodo = function () {
             var newTodo = $scope.newTodo.trim();
