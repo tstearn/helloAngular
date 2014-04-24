@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('helloAngularApp')
-    .controller('MainCtrl', function TodoCtrl($scope, $routeParams, $filter) {
+    .controller('MainCtrl', function TodoCtrl($scope, $routeParams, $filter, todoStorage) {
         'use strict';
 
-        var todos = $scope.todos = [];
+        var todos = $scope.todos = todoStorage.get();
 
         $scope.newTodo = '';
         $scope.editedTodo = null;
@@ -13,6 +13,9 @@ angular.module('helloAngularApp')
             $scope.remainingCount = $filter('filter')(todos, { completed: false }).length;
             $scope.completedCount = todos.length - $scope.remainingCount;
             $scope.allChecked = !$scope.remainingCount;
+            if (newValue !== oldValue) { // This prevents unneeded calls to the local storage
+                todoStorage.put(todos);
+            }
         }, true);
 
         //Method called to add an item
